@@ -6,7 +6,7 @@ const PLUGIN_ID = require('../plugin.json').id;
 
 const NPM_TARGET = process.env.npm_lifecycle_event; //eslint-disable-line no-process-env
 let mode = 'production';
-let devtool = '';
+let devtool = false;
 if (NPM_TARGET === 'debug' || NPM_TARGET === 'debug:watch') {
     mode = 'development';
     devtool = 'source-map';
@@ -59,23 +59,6 @@ module.exports = {
                         // Babel configuration is in babel.config.js because jest requires it to be there.
                     },
                 },
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sassOptions: {
-                                includePaths: ['node_modules/compass-mixins/lib', 'sass'],
-                            },
-                        },
-                    },
-                ],
             },
         ],
     },
